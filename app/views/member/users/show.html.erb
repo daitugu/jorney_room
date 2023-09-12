@@ -1,0 +1,31 @@
+<div class="container">
+
+  <h5 class >マイページ</h5>
+  <h5><strong>登録情報</strong> </h5>
+  <%= link_to "編集する" ,edit_user_path(current_user) , class: "btn btn-success"%>
+
+  <div class="field"> 
+    <div class="form-inline">
+<div class="field">
+   <strong><%= f.label :"ハンドルネーム" %></strong><br>
+  <%= f.text_field :name , autocomplete: "name"%>
+</div>
+ <div class="field">
+     <strong><%= f.label :メールアドレス %></strong><br>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" , :placeholder =>"sample@exsample.com"%>
+  </div>
+
+  <div class="field">
+     <strong><%= f.label :パスワード %></strong>
+    <% if @minimum_password_length %>
+    <strong>(<%= @minimum_password_length %> 文字以上)</strong>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <strong><%= f.label :"パスワード(確認用)" %></strong><br>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+
