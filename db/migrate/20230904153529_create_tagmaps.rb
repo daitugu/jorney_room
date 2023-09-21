@@ -5,7 +5,7 @@ class CreateTagmaps < ActiveRecord::Migration[6.1]
     t.integer :post_id
       t.timestamps
     end
-    add_index :tagmaps, :user_id,                unique: true
-    add_index :tagmaps, :post_id,                unique: true
+    add_index :tagmaps, :user_id
+    add_index :tagmaps, :post_id
   end
 end

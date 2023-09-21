@@ -5,7 +5,7 @@ class CreateBookmarks < ActiveRecord::Migration[6.1]
     t.integer :post_id
       t.timestamps
     end
-    add_index :bookmarks, :user_id,                unique: true
-    add_index :bookmarks, :post_id,                unique: true
+    add_index :bookmarks, :user_id
+    add_index :bookmarks, :post_id
   end
 end

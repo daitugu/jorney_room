@@ -1,0 +1,13 @@
+<% @post.each do |post| %>
+  <div>
+    <%= link_to post_path(post.id) do %>
+    <%= image_tag post.get_image %>
+  <% end %>
+  <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image %></p>
+    <p>宿泊代金：<%= post.lodging_fee %></p>
+    <p>所在地：<%= post.location %></p>
+    <p>部屋の種類：<%= post.room_type %></p>
+    <p>感想：<%= post.thoughts %></p>
+    <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
+  </div>
+<% end %>

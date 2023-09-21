@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2023_09_06_165935) do
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_bookmarks_on_post_id", unique: true
-    t.index ["user_id"], name: "index_bookmarks_on_user_id", unique: true
+    t.index ["post_id"], name: "index_bookmarks_on_post_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2023_09_06_165935) do
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_comments_on_post_id", unique: true
-    t.index ["user_id"], name: "index_comments_on_user_id", unique: true
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2023_09_06_165935) do
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_likes_on_post_id", unique: true
-    t.index ["user_id"], name: "index_likes_on_user_id", unique: true
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 2023_09_06_165935) do
     t.string "room_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tag_id"], name: "index_posts_on_tag_id", unique: true
-    t.index ["user_id"], name: "index_posts_on_user_id", unique: true
+    t.index ["tag_id"], name: "index_posts_on_tag_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "tagmaps", force: :cascade do |t|
@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 2023_09_06_165935) do
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_tagmaps_on_post_id", unique: true
-    t.index ["user_id"], name: "index_tagmaps_on_user_id", unique: true
+    t.index ["post_id"], name: "index_tagmaps_on_post_id"
+    t.index ["user_id"], name: "index_tagmaps_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|

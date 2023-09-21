@@ -1,31 +1,31 @@
 <div class="container">
 
-  <h5 class >マイページ</h5>
-  <h5><strong>登録情報</strong> </h5>
-  <%= link_to "編集する" ,edit_user_path(current_user) , class: "btn btn-success"%>
 
-  <div class="field"> 
-    <div class="form-inline">
-<div class="field">
-   <strong><%= f.label :"ハンドルネーム" %></strong><br>
-  <%= f.text_field :name , autocomplete: "name"%>
+
+   <div class="col-lg-4 ">
+ <div>
+  <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image %>
+  <% if @user == current_user %>
+  <p><%= link_to "プロフィール編集", edit_user_path %></p>
+   <% end %>
 </div>
- <div class="field">
-     <strong><%= f.label :メールアドレス %></strong><br>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" , :placeholder =>"sample@exsample.com"%>
-  </div>
 
-  <div class="field">
-     <strong><%= f.label :パスワード %></strong>
-    <% if @minimum_password_length %>
-    <strong>(<%= @minimum_password_length %> 文字以上)</strong>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+  <h5><strong>マイページ</strong> </h5>
+  <h5>登録情報</h5>
+<%= form_with model: @user  do |f| %>
 
-  <div class="field">
-    <strong><%= f.label :"パスワード(確認用)" %></strong><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+  <h4>ニックネーム</h4> <%= f.text_field :name, readonly: true  %>
+  <h4>メールアドレス</h4>  <%= f.text_field :email, readonly: true %><br>
+ <% end %>
+<div class="col-lg-0">
+<%= link_to "投稿一覧",root_path,class: "btn btn-success" %>
 
+<%= link_to "ブックマーク",root_path, class: "btn btn-success" %>
 
+<%= link_to "編集する" ,edit_user_path(current_user) , class: "btn btn-success"%>
+</div>
+</div>
+</div>
+
+</div>
