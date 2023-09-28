@@ -1,0 +1,54 @@
+
+
+  <div class="m-5">
+    
+      <div class="panel-body">
+
+        <% if @bookmarks.length != 0 %>
+        <% @bookmarks.each do |bookmark| %>
+        <% post = bookmark.post %>
+          <div>
+            <%= image_tag post.get_image %>
+            <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image %></p>
+            <p>宿泊代金：<%= post.lodging_fee %></p>
+            <p>所在地：<%= post.location %></p>
+            <p>部屋の種類：<%= post.room_type %></p>
+            <p>感想：<%= post.thoughts %></p>
+          <p>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
+         </div>
+  <div>
+  <p>コメント件数：<%= post.comments.count %></p>
+  <% post.comments.each do |comment| %>
+    <p><%= image_tag comment.user.get_profile_image %></p>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+           <% if comment.user == current_user %>
+            <%= link_to "削除", post_comment_path(post,comment), method: :delete %>
+             <% end %>
+              <% if post.liked_by?(current_user) %>
+                <p>
+                <%= link_to post_likes_path(post), method: :delete do %>
+                ♥<%= post.likes.count %> いいね
+              <% end %>
+            </p>
+            <% else %>
+          <p>
+          <%= link_to post_likes_path(post), method: :post do %>
+        ♡<%= post.likes.count %> いいね
+        <% end %>
+      </p>
+    <% end %>
+  <% end %>
+  </div>
+          <% end %>
+        <% else %>
+            <div class="text-center">
+              お気に入りはまだ登録されていません。
+            </div>
+        <% end %>
+
+      
+    </div>
+  </div>
+
+

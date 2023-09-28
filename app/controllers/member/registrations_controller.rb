@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Member::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :authenticate_user!, except: [:new, :create]
   # before_action :configure_account_update_params, only: [:update]
   before_action :configure_sign_up_params, only: [:create,]
 
@@ -11,7 +11,7 @@ class Member::RegistrationsController < Devise::RegistrationsController
   # def new
   #   super
      def after_sign_up_path_for(resource)
-      user_path(resource)
+      posts_path
      end
   end
 end

@@ -1,16 +1,19 @@
 <p id="notice"></p>
-   <div class="center-block">
-   <div class="set_center_outer">
-    <div class = "mx-auto col-12 col-sm-12 col-lg-10 col-xl-6">
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto  px-0 my-5">
+    <div class = "col-12">
 <strong>本当に退会しますか</strong><br>
-<div class="d-flex align-items-center">
+<div class>
  退会すると、会員登録情報や<br>
  これまでの購入履歴が閲覧できなくなります。<br>
  退会する場合は、「退会する」をクリックしてください。
   </div>
 
-    <%= link_to "退会しない", user_path(current_user) , class: "btn btn-primary"%>
+    <%= link_to "退会しない", edit_user_path(current_user) , class: "btn btn-primary"%>
 
      <%= link_to "退会する", leave_path, method: :patch, class: "btn btn-danger", "data-confirm" => "本当に退会しますか？" %>
+</div>
+</div>
 </div>
 </div>

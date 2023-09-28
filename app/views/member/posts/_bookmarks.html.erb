@@ -1,0 +1,7 @@
+  <div class="bookmark">
+    <% if @post.find_bookmark(current_user).blank? %>
+      <%= link_to "お気に入りに登録", bookmarks_path(params:{post_id: @post.id }), method: :post, class: "btn btn-success btn-lg" %>
+    <% else %>
+      <%= link_to "お気に入りを解除", bookmark_path(@post,@post.find_bookmark(current_user)), method: :delete, class: "btn btn-outline-success btn-lg" %>
+    <% end %>
+  </div>

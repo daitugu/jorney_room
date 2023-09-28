@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Admin::RegistrationsController < Devise::RegistrationsController
+   before_action :authenticate_admin!, except: [:new, :create]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-layout 'top'
   # GET /resource/sign_up
   # def new
   #   super

@@ -22,11 +22,18 @@
        <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
     <% if user_signed_in? %>
+
+    <%= render 'member/searches/search',searches:@searches %>
    <li>
     <%= link_to '投稿フォーム', new_post_path, class: "nav-link text-light"  %>
    </li>
+   <li>
+      <%= link_to  posts_path, class: "nav-link text-light" do %>
+      投稿一覧
+      <%end%>
+     </li>
     <li>
-        <%= link_to user_path(current_user), class: "nav-link text-light" do %>
+        <%= link_to mypage_path, class: "nav-link text-light" do %>
        マイページ
       <%end%>
       </li>
@@ -36,11 +43,25 @@
          ログアウト
       <%end%>
       </li>
-      
-<% else %>
-    
+    <% elsif admin_signed_in? %>
     <li>
-        <%= link_to root_path, class: "nav-link text-light" do %>
+    <%= render 'member/searches/search',searches:@searches %>
+    </li>
+   <li>
+      <%= link_to  posts_path, class: "nav-link text-light" do %>
+      投稿一覧
+      <%end%>
+     </li>
+   <li>
+      <%= link_to destroy_admin_session_path, method: :delete , class: "nav-link text-light" do %>
+         ログアウト
+      <%end%>
+      </li>
+
+    <% else %>
+    <%= render 'member/searches/search',searches:@searches %>
+    <li>
+        <%= link_to posts_path, class: "nav-link text-light" do %>
      投稿一覧
       <%end%>
       </li>
@@ -54,12 +75,12 @@
         <%= link_to new_user_session_path, class: "nav-link text-light" do  %>
          ログイン
       <%end%>
-
       </li>
-    <% end %>
+   <% end %>
      </ul>
     </div>
     </nav>
+    </div>
   </header>
   <% if flash[:notice] %>
       <div class="flash">

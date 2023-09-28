@@ -1,0 +1,29 @@
+
+<div class="col-md-4">
+  <table border="3" >
+
+      <div>
+        <%= image_tag @post.get_image %>
+        <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image %></p>
+        <p>宿泊代金：<%= @post.lodging_fee %></p>
+        <p>所在地：<%= @post.location %></p>
+        <p>部屋の種類：<%= @post.room_type %></p>
+        <p>感想：<%= @post.thoughts %></p>
+        <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+          <%= link_to "削除", admin_post_path(@post), method: :delete %>
+      </div>
+      
+      <div>
+        <p>コメント件数：<%= @post.comments.count %></p>
+        <% @post.comments.each do |comment| %>
+          <p><%= image_tag comment.user.get_profile_image %></p>
+          <%= comment.user.name %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+          <%= link_to "削除", post_comment_path(@post,comment), method: :delete %>
+          
+          <p>♥<%= @post.likes.count %> いいね</p>
+        <% end %>
+      </div>
+   
+  </table>
+</div>

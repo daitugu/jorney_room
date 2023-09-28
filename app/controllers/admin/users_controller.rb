@@ -1,10 +1,11 @@
 class Admin::UsersController < ApplicationController
-  def show
-  end
+   before_action :authenticate_admin!
+ 
 
-  def edit
+  def draft
+  @user  = User.find(params[:id])
+  @user_posts = @user.posts.where(is_opened: true).page(params[:page])
   end
+  
 
-  def update
-  end
 end
