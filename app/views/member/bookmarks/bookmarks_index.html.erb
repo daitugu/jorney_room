@@ -1,54 +1,37 @@
-
-
-  <div class="m-5">
-    
-      <div class="panel-body">
+<div class="col-md-6 offset-md-3">
+      <h5 class >投稿一覧 (全<%= @bookmarks.count %>件)</h5>
+ <div class="row">
 
         <% if @bookmarks.length != 0 %>
         <% @bookmarks.each do |bookmark| %>
         <% post = bookmark.post %>
-          <div>
-            <%= image_tag post.get_image %>
-            <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image %></p>
-            <p>宿泊代金：<%= post.lodging_fee %></p>
-            <p>所在地：<%= post.location %></p>
-            <p>部屋の種類：<%= post.room_type %></p>
-            <p>感想：<%= post.thoughts %></p>
-          <p>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></p>
-         </div>
-  <div>
-  <p>コメント件数：<%= post.comments.count %></p>
-  <% post.comments.each do |comment| %>
-    <p><%= image_tag comment.user.get_profile_image %></p>
-    <%= comment.user.name %>
-    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-           <% if comment.user == current_user %>
-            <%= link_to "削除", post_comment_path(post,comment), method: :delete %>
-             <% end %>
-              <% if post.liked_by?(current_user) %>
-                <p>
-                <%= link_to post_likes_path(post), method: :delete do %>
-                ♥<%= post.likes.count %> いいね
-              <% end %>
-            </p>
-            <% else %>
-          <p>
-          <%= link_to post_likes_path(post), method: :post do %>
-        ♡<%= post.likes.count %> いいね
-        <% end %>
-      </p>
-    <% end %>
-  <% end %>
+  <div class="card mb-4 shadow-sm">
+ <%= link_to post_path(post.id)   do %>
+  <%= image_tag post.get_image, size: "200x200" %>
+ <% end %>
+     <div class="card-body">
+      <div class="btn-group">
+         <td><%= post.lodging_fee %>¥</td><br>
+           <%= link_to posts_path(user_id:post.user_id)do %>
+          <td><%= image_tag post.user.get_profile_image, size: "100x100" %></td><br>
+          <%=  post.user.name  %><br>
+       <% end %>
+      </div>
+ </div>
   </div>
-          <% end %>
-        <% else %>
+  <% end %>
+</div>
+<% end %>
+ <% if @bookmarks.length <= 0 %>  
             <div class="text-center">
               お気に入りはまだ登録されていません。
             </div>
-        <% end %>
-
-      
+ <% end %>      
     </div>
-  </div>
 
+
+
+
+   
+<%= paginate @bookmarks %>
 

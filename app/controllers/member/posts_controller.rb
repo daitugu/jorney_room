@@ -8,20 +8,24 @@ class Member::PostsController < ApplicationController
     @post= Post.new(post_params)
     @post.user_id = current_user.id
    if params[:draft]
-    if @post.update(is_opened: false)
-        redirect_to draft_path
-    else
-        render :new
-    end
-
-
+     @post.is_opened = false
    else
     @post.is_opened = true
+   end
+    input_tags = params[:name].split
+    new_tags = []
+    input_tags.each do |tag| # 新しいタグをモデルに追加
+      new_tag = Tag.find_or_create_by(name: tag)
+      new_tags.push(new_tag.id)
+      #tags << new_tag
+   end
    if @post.save
+    new_tags.each do |tag|
+    Tagmap.create(:post_id => @post.id, :tag_id =>tag)
+   end
     redirect_to posts_path
    else
       render :new
-   end
    end
   end
 
@@ -29,10 +33,14 @@ class Member::PostsController < ApplicationController
   @post = Post.find(params[:id])
   end
 
+  def detail
+  @post = Post.find(params[:id])
+  end
+
   def update
     @post = Post.find(params[:id])
     if params[:publicize_draft]
-         @post.is_opened = true
+      @post.is_opened = true
       if @post.save(context: :publicize)
         redirect_to posts_path(@post.id)
       else
@@ -41,14 +49,33 @@ class Member::PostsController < ApplicationController
       end
     elsif params[:update_post]
       @post.attributes = post_params
+      Tagmap.where(:post_id =>@post.id).destroy_all
+      input_tags = params[:name].split
+      new_tags = []
+      input_tags.each do |tag|
+        new_tag = Tag.find_or_create_by(name: tag)
+        new_tags.push(new_tag.id)
+      end
       if @post.save(context: :publicize)
+        new_tags.each do |tag|
+         Tagmap.create(:post_id => @post.id, :tag_id =>tag)
+        end
         redirect_to post_path(@post.id)
       else
         render :edit
       end
-
     else
+      Tagmap.where(:post_id =>@post.id).destroy_all
+      input_tags = params[:name].split
+      new_tags = []
+      input_tags.each do |tag|
+        new_tag = Tag.find_or_create_by(name: tag)
+        new_tags.push(new_tag.id)
+      end
       if @post.update(post_params)
+        new_tags.each do |tag|
+         Tagmap.create(:post_id => @post.id, :tag_id =>tag)
+        end
         redirect_to post_path(@post.id)
       else
         render :edit
@@ -65,6 +92,7 @@ class Member::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+
   end
 
   def index
@@ -84,6 +112,7 @@ class Member::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:tag_id, :image,  :thoughts, :location, :lodging_fee, :room_type, :is_opened)
+    #params.require(:post).permit( :image,  :thoughts, :location, :lodging_fee, :room_type)
+    params.permit( :image,  :thoughts, :location, :lodging_fee, :room_type)
   end
 end

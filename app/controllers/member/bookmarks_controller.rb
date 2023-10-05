@@ -21,7 +21,7 @@ class Member::BookmarksController < ApplicationController
 
   def bookmarks_index
     @user = User.find(params[:id])
-    @bookmarks = @user.bookmarks
+    @bookmarks = @user.bookmarks.page(params[:page])
   end
 
   private

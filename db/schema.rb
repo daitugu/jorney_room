@@ -89,7 +89,6 @@ ActiveRecord::Schema.define(version: 2023_09_25_121029) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "tag_id"
     t.text "thoughts"
     t.string "location"
     t.integer "lodging_fee"
@@ -97,17 +96,16 @@ ActiveRecord::Schema.define(version: 2023_09_25_121029) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_opened", default: false
-    t.index ["tag_id"], name: "index_posts_on_tag_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "tagmaps", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "tag_id"
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_tagmaps_on_post_id"
-    t.index ["user_id"], name: "index_tagmaps_on_user_id"
+    t.index ["tag_id"], name: "index_tagmaps_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|

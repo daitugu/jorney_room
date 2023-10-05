@@ -11,7 +11,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+
 <header class="shadow-sm">
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
       <div class="container">
@@ -87,16 +88,30 @@
  <%= flash[:notice] %>
         </div>
     <% end %>
-  <p id="notice"></p>
-  <main> <%= yield %></main>
-   <footer>
-    <dif class="container mt-5">
-      <dif class="row">
-       <diF class="mx-auto" >
-              </diF>
-      </dif>
-    </dif>
-  </footer>
+  <!--<p id="notice"></p>-->
+ <main class="mb-auto ">
+  <%= yield %>
+  </main>
+              </ul>
+          </div>
+
+      </div>
+    </footer>
+
+  </body>
+
+</html>
+    <!--footer class="bg-dark text-white pt-5 pb-4 fixed-bottom">
+
+          <div class="col-md-8">
+
+
+            </ul>
+          </div>
+
+      </div>
+    </footer>
+
   </body>
 
 </html>

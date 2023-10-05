@@ -1,26 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
-
+    <div class="col-md-10 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-6">
       <div class="form-body p-3">
-<div>
-    <%= image_tag @post.get_image %>
-    <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image %></p>
+<div class="col-8 mx-auto">
+  <%= link_to detail_post_path(@post) do %>
+    <%= image_tag @post.get_image, class: "img-fluid" %>
+    <% end %>
+    <div class="d-grid gap-2 col-6 mt-2 mx-auto">
+    <%= link_to posts_path(user_id:@post.user_id)do %>
+    <p><%= image_tag @post.user.get_profile_image %></p>
+    <%=  @post.user.name  %><br>
+    <% end %>
+   </div>
+</div>
+<div class="d-grid gap-2 col-6 mt-2 mx-auto">
     <p>宿泊代金：<%= @post.lodging_fee %></p>
     <p>所在地：<%= @post.location %></p>
     <p>部屋の種類：<%= @post.room_type %></p>
     <p>感想：<%= @post.thoughts %></p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+  <p>
+    <% @post.tags.each do |tag| %>
+    <%= tag.name %>
+    <% end %>
+  </p>
+
 
 </div>
 
-<div>
+<div class="d-grid gap-2 col-6 mt-2 mx-auto">
   <p>コメント件数：<%= @post.comments.count %></p>
   <% @post.comments.each do |comment| %>
     <p><%= image_tag comment.user.get_profile_image %></p>
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-<% if @post.user == current_user %>
+    <% if comment.user == current_user %>
+   <%= link_to "削除", post_comment_path(@post,comment), method: :delete %>
+    <% end %>
+
       <% if @post.liked_by?(current_user) %>
     <p>
       <%= link_to post_likes_path(@post), method: :delete do %>
@@ -36,16 +53,22 @@
   <% end %>
   <% end %>
 </div>
- <% end %>
-<div>
-  <%= form_with model: [@post, @comment] ,url: post_comments_path(@post) do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
-<%= render "bookmarks", post: @post %>
 
+<div class="d-grid gap-2 col-6 mt-2 mx-auto">
+  <%= form_with model: [@post, @comment] ,url: post_comments_path(@post) do |f| %>
+    <%= f.text_area :comment, rows: '2', placeholder: "コメントをここに" %>
+    <%= f.submit "コメントを送信する" %>
+    </div>
+  <% end %>
+
+<div class="d-grid gap-2 col-6 mt-2 mx-auto">
+<%= render "bookmarks", post: @post %>
+<div class="  mt-2 mx-auto">
 <% if @post.user == current_user %>
 <%= link_to "編集", edit_post_path(@post.id) %>
 <%= link_to "削除", "/posts/#{@post.id}", method: :delete, data: {confirm: "削除しますか？"}, class:'text-danger' %>
  <% end %>
+     </div>
+    <div>
+  </div>
+<div>
