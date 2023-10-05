@@ -30,7 +30,7 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-​後ほど作成予定
+
 
 ※実装機能リストURL
 https://docs.google.com/spreadsheets/d/1RoHhpWMLglYxLdUL1sB7NWuaiDtLPKj1LJ6IHvqRhF4/edit#gid=885378170
