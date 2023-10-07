@@ -1,26 +1,25 @@
 <div class="container ">
   <div class="row">
    <table border="2">
-  <thead>
-    <tr>
-      <th>ユーザーネーム</th><br>
-      <td><%= @user.name %></td>
-    </tr>
-    <tr>
-      <th>メールアドレス</th><br>
-      <td><%= @user.email %></td>
-    </tr>
-      </table>
+    <thead>
+      <tr>
+        <th>ユーザーネーム</th><br>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th><br>
+        <td><%= @user.email %></td>
+      </tr>
+    </table>
   </div>
 </div>
-
 <div class="container mt-2 ">
   <div class="row">
-<% @user_posts.each do |post| %>
-     <%= link_to admin_post_path(post.id) do %>
+    <% @user_posts.each do |post| %>
+    <%= link_to admin_post_path(post.id) do %>
     <%= image_tag post.get_image, size: "200x200" %>
-  <% end %>
-<% end %>
+    <% end %>
+    <% end %>
   </div>
 </div>
 <%= paginate @user_posts  %>

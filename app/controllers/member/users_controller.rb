@@ -36,13 +36,14 @@ class Member::UsersController < ApplicationController
 
   def leave
     @user = current_user
+    @user.posts.destroy_all if @user.posts.any?
     @user.update(is_deleted: true)
     reset_session
     redirect_to root_path
   end
 
   def user_params
-    params.require(:user).permit(:name,:email,:password)
+    params.require(:user).permit(:name,:email,:password,:profile_image)
   end
 
 end

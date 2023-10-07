@@ -1,23 +1,22 @@
 <div class="col-md-6 offset-md-3">
-      <h5 class >投稿一覧 (全<%= @post.count %>件)</h5>
- <div class="row">
-
- <% @post.each do |post| %>
-  <div class="card mb-4 shadow-sm">
- <%= link_to post_path(post.id)   do %>
-  <%= image_tag post.get_image, size: "200x200", loading: "lazy" %>
- <% end %>
+   <h5 class >投稿一覧 (全<%= @post.count %>件)</h5>
+     <div class="row">
+       <% @post.each do |post| %>
+     <div class="card mb-4 shadow-sm">
+      <%= link_to post_path(post.id)   do %>
+      <%= image_tag post.get_image, size: "200x200", loading: "lazy" %>
+      <% end %>
      <div class="card-body">
-      <div class="btn-group">
-         <td><%= post.lodging_fee %>¥</td><br>
-           <%= link_to posts_path(user_id:post.user_id)do %>
-          <td><%= image_tag post.user.get_profile_image, size: "100x100" %></td><br>
-          <%=  post.user.name  %><br>
-       <% end %>
+     <div class="btn-group">
+     <td><%= post.lodging_fee %>¥</td><br>
+         <%= link_to posts_path(user_id:post.user_id)do %>
+     <td><%= image_tag post.user.get_profile_image, size: "100x100" %></td><br>
+         <%=  post.user.name  %><br>
+      <% end %>
       </div>
     </div>
   </div>
-  <% end %>
-
+      <% end %>
+ </div>
+   <%= paginate @post %>
 </div>
-<%= paginate @post %>

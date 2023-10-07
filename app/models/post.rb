@@ -32,22 +32,22 @@ class Post < ApplicationRecord
   def self.looks(search, word)
     if search == "perfect_match"
       @post = Post.where("thoughts LIKE ? OR location LIKE ? OR lodging_fee LIKE ? OR room_type LIKE ?",
-                          "#{word}", "#{word}", "#{word}", "#{word}")
+                          "#{word}", "#{word}", "#{word}", "#{word}").where(:is_opened =>true)
     elsif search == "partial_match"
       @post = Post.where("thoughts LIKE ? OR location LIKE ? OR lodging_fee LIKE ? OR room_type LIKE ?",
-                          "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
+                          "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%").where(:is_opened =>true)
     else
       @post = Post.all
     end
   end
-  
+
   def create_tags(input_tags)
     input_tags.each do |tag|                     # splitで分けたtagをeach文で取得する
       new_tag = Tag.find_or_create_by(name: tag) # tagモデルに存在していれば、そのtagを使用し、なければ新規登録する
       tags << new_tag                            # 登録するtopicのtagに紐づける（中間テーブルにも反映される）
     end
   end
-  
+
   def update_tags(input_tags)
     registered_tags = tags.pluck(:name) # すでに紐付けれらているタグを配列化する
     new_tags = input_tags - registered_tags # 追加されたタグ
@@ -64,5 +64,5 @@ class Post < ApplicationRecord
       destroy_tagging.destroy
     end
   end
-  
+
 end

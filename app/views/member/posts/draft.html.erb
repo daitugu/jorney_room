@@ -1,17 +1,15 @@
 <div class="col-md-9 offset-md-3">
-      <h5 class = "ad_log_in">下書き一覧 (全<%= @post.count %>件)</h5>
- <div class="row">
-   
-<% @post.each do |post| %>
-<div class="card mb-4 shadow-sm">
-  <div>
-    <%= link_to post_path(post.id) do %>
-    <%= image_tag post.get_image, size: "200x200" %>
-  <% end %>
-
+  <h5 class = "ad_log_in">下書き一覧 (全<%= @post.count %>件)</h5>
+    <div class="row">
+      <% @post.each do |post| %>
+    <div class="card mb-4 shadow-sm">
+    <div>
+      <%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_image, size: "200x200" %>
+      <% end %>
+    </div>
+    </div>
+      <% end %>
+      <%= paginate @post %>
   </div>
-  </div>
-<% end %>
-<%= paginate @post %>
-  </div>
-  </div>
+</div>

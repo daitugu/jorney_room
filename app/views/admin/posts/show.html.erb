@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-md-8 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-3">
-
       <div>
         <%= link_to admin_detail_path do %>
         <%= image_tag @post.get_image, class: "img-fluid" %>
@@ -14,20 +13,18 @@
         <p>感想：<%= @post.thoughts %></p>
         <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
           <%= link_to "削除", admin_post_path(@post), method: :delete %>
-      </div>
-
-      <div>
+        </div>
+        <div>
         <p>コメント件数：<%= @post.comments.count %></p>
-        <% @post.comments.each do |comment| %>
+          <% @post.comments.each do |comment| %>
           <p><%= image_tag comment.user.get_profile_image %></p>
           <%= comment.user.name %>
           <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
           <%= link_to "削除", admin_post_comment_path(@post,comment), method: :delete %>
-
           <p>♥<%= @post.likes.count %> いいね</p>
         <% end %>
+        </div>
       </div>
-       </div>
     </div>
   </div>
 </div>

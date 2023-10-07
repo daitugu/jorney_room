@@ -2,45 +2,43 @@
   <div class="row">
     <div class="col-md-6 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <h6 class="text-dark bg-light p-4 mb-0">画像投稿フォーム</h6>
-      <div class="col-12 mt-2 mx-auto">
-<% if @post.errors.any? %>
-          <ul class="alert alert-danger" role="alert">
+        <div class="col-12 mt-2 mx-auto">
+          <% if @post.errors.any? %>
+            <ul class="alert alert-danger" role="alert">
             <h6 class="alert-heading">
-  <%= @post.errors.count %>件のエラーが発生しました
-   </h6>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-      <div class="main-content col-8">
-
-<%= form_with  url: posts_path do |f| %>
-  <h6>画像</h6>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h6>宿泊代金</h6>
-  <%= f.text_field :lodging_fee, size: "10"   %><td>￥</td>
-  <h6>所在地</h6>
-  <%= f.text_area :location %>
-  <h6>部屋の種類</h6>
-  <%= f.text_field :room_type %>
-  <h6>感想</h6>
-  <%= f.text_area :thoughts %>
-  <%= f.label :name, "タグ(半角スペースで複数個登録できます)" %>
-  <%= f.text_field :name %>
- 
-  <div class="d-grid gap-2 col-12 mt-2 mx-auto">
-  <%= f.submit '投稿' %>
-  </div>
-  <div class="d-grid gap-2 col-12 mt-2 mx-auto">
-  <%= f.submit '下書きに保存', :name => 'draft', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
-   <% end %>
-   </div>
-   <div class="d-grid gap-0 col-12 mt-2 mx-auto">
-  <%= link_to '下書き一覧', draft_posts_path(current_user), class: 'mr-5 btn btn-sm btn-outline-secondary' %>
-   </div>
+          <%= @post.errors.count %>件のエラーが発生しました
+            </h6>
+          <% @post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+          <% end %>
+        <div class="main-content col-8">
+          <%= form_with  url: posts_path do |f| %>
+          <h6>画像</h6>
+          <%= f.file_field :image, accept: "image/*" %>
+          <h6>宿泊代金</h6>
+          <%= f.text_field :lodging_fee, size: "10"   %><td>￥</td>
+          <h6>所在地</h6>
+          <%= f.text_area :location %>
+          <h6>部屋の種類</h6>
+          <%= f.text_field :room_type %>
+          <h6>感想</h6>
+          <%= f.text_area :thoughts %>
+          <%= f.label :name, "タグ(半角スペースで複数個登録できます)" %>
+          <%= f.text_field :name %>
+        <div class="d-grid gap-2 col-12 mt-2 mx-auto">
+          <%= f.submit '投稿' %>
+        </div>
+        <div class="d-grid gap-2 col-12 mt-2 mx-auto">
+          <%= f.submit '下書きに保存', :name => 'draft', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
+           <% end %>
+        </div>
+         <div class="d-grid gap-0 col-12 mt-2 mx-auto">
+          <%= link_to '下書き一覧', draft_posts_path(current_user), class: 'mr-5 btn btn-sm btn-outline-secondary' %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
- </div>
 </div>

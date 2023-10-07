@@ -21,8 +21,8 @@ devise_for :users,skip: [:passwords], controllers: {
 
 scope module: :member do
  root to: 'homes#top'
- patch "/customers/leave" => "customers#leave", as: "leave"
  get "/users/withdraw" => "users#withdraw", as: "withdraw"
+ patch "/users/leave" => "users#leave", as: "leave"
  get "/searches/search" => "searches#search", as: "searches"
 
  resources :bookmarks, only: [:create, :destroy] do
@@ -46,5 +46,5 @@ scope module: :member do
  end
 
 
-end
+ end
 end

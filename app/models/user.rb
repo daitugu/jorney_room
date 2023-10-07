@@ -9,7 +9,7 @@ class User < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :bookmarks, dependent: :destroy
     has_one_attached :profile_image
-    
+
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -31,5 +31,8 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end
+

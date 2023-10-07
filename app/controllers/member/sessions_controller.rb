@@ -23,6 +23,7 @@ class Member::SessionsController < Devise::SessionsController
   redirect_to new_customer_session_path#GET /resource/sign_in
   end  # def new
  end
+end
   # GET /resource/sign_in
   # def new
   #   super
@@ -44,4 +45,4 @@ class Member::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-end
+
