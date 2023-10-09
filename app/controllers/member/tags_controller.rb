@@ -1,4 +1,4 @@
-class Admin::TagsController < ApplicationController
+class Member::TagsController < ApplicationController
    before_action :authenticate_admin!
   def new
     @post = Post.new
@@ -16,15 +16,15 @@ class Admin::TagsController < ApplicationController
   end
 
   def update
-    input_tags = tag_params.split  
+    input_tags = tag_params.split
     @post.update_tags(input_tags) # udpate_tagsはtopic.rbに記述している
     redirect_to request.referer    # editページに戻るようにしている
   end
-  
+
   def destroy
   end
-  
-  private 
+
+  private
     def tag_params # tagに関するストロングパラメータ
       params.require(:post).permit(:name)
     end
