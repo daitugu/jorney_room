@@ -2,7 +2,7 @@ class Member::BookmarksController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    post =　Post.find(params[:post_id])
+    post = Post.find(params[:post_id])
     bookmark = current_user.bookmarks.build(bookmark_params)
     bookmark.save!
     redirect_to posts_path(post), notice: "お気に入りに登録しました。"
