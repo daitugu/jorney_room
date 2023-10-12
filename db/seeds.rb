@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+puts "seedの実行を開始"
 Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
   admin.password = ENV['ADMIN_PASSWORD']
 end
@@ -34,3 +35,4 @@ Post.create!(
     {lodging_fee: "2000", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg"), location: "香川", room_type:"ワンルーム",thoughts: "大人気の観光地です。", user_id: lucas.id }
   ]
 )
+puts "seedの実行が完了しました"

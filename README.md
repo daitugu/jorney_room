@@ -19,9 +19,7 @@
 - 費用が限られた旅行の宿決め
 - 外出中急に宿泊先を探すことになった時
 - バックパッカーやツーリストが宿泊先を探す際
-## 設計書
-<!--テーマを設定・提出する時点では不要です-->
-​後ほど作成予定
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
@@ -29,8 +27,3 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
-## 使用素材
-
-
-※実装機能リストURL
-https://docs.google.com/spreadsheets/d/1RoHhpWMLglYxLdUL1sB7NWuaiDtLPKj1LJ6IHvqRhF4/edit#gid=885378170
