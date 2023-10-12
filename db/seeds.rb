@@ -10,29 +10,16 @@ Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
   admin.password = ENV['ADMIN_PASSWORD']
 end
 
-olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
-  user.name = "Olivia"
-  user.password = "password"
+testdeta = User.find_or_create_by!(email: "test@example.com") do |user|
+  user.name = "testdeta"
+  user.password = "password1"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
 end
 
-james = User.find_or_create_by!(email: "james@example.com") do |user|
-  user.name = "James"
-  user.password = "password"
-  user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
-end
-
-lucas = User.find_or_create_by!(email: "lucas@example.com") do |user|
-  user.name = "Lucas"
-  user.password = "password"
-  user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
-end
 
 Post.create!(
   [
-    {lodging_fee: "2000", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg"), location: "東京", room_type:"ワンルーム",thoughts: "大人気のルームです。", user_id: olivia.id },
-    {lodging_fee: "2000", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg"), location: "大阪", room_type:"ワンルーム",thoughts: "大人気のカフェです。", user_id: james.id },
-    {lodging_fee: "2000", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg"), location: "香川", room_type:"ワンルーム",thoughts: "大人気の観光地です。", user_id: lucas.id }
+    {lodging_fee: "3000", image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg"), location: "東京都", room_type:"2ldk",thoughts: "大人気です。", user_id: testdeta.id },
   ]
 )
 puts "seedの実行が完了しました"
